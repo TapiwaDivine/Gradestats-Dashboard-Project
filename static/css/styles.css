@@ -1,0 +1,101 @@
+/*--------------------------------------global---------------------------------------------*/
+body{
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    padding: 0;
+    margin: 0;
+}
+h2{
+    text-align: center;
+    font-weight: bold;
+    color: #191970;
+    text-transform: capitalize;
+    text-decoration: underline;
+    padding-bottom: 10px;
+}
+
+ ul {
+    margin: 0;
+    padding: 0;
+}
+
+hr {
+    padding-bottom: 10px;
+}
+/*-------------------------------------------------Header------------------------------------*/
+header {
+    background-color: #3672DD;
+    color: #ffffff;
+    padding-top: 30px;
+    min-height: 100px
+}
+
+header a {
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+header li {
+    float: left;
+    display: inline;
+    padding: 0 20px 20px ;
+}
+
+header #branding{
+    float: left;
+}
+
+header #branding #logo{
+    font-family: 'Black Ops One', cursive;
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 0;
+    padding-left: 15px;
+}
+
+header nav {
+    float: right;
+    margin-top: 10px;
+}
+header .current a{
+    color: #151B54;
+    font-weight: bold;
+}
+
+header a:hover{
+    color: #cccccc;
+    font-weight: bold;
+}
+
+
+#showcase .bg-image{
+    min-height: 300px;
+    background:linear-gradient(
+    rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 0, 0.6)
+    ),
+    url(/static/images/stationery.jpg) no-repeat;
+    background-size: 100% 100%;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    
+}
+
+#showcase .bg-image h1 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    color: white;
+    text-transform: uppercase;
+    font-size: 3rem;
+    padding-top: 5rem;
+}
+
+/*----------------------------------------Main---------------------------------------*/
+
+#gender-selector .chart-selector{
+    text-align: center;
+}
+    
