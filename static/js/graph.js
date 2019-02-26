@@ -82,6 +82,7 @@ var averageMathscore = mathDim.group().reduce(add_item, remove_item, initialise)
         .transitionDuration(500)
         .x(d3.scale.ordinal())
         .xUnits(dc.units.ordinal)
+        .legend(dc.legend().x(320).y(40))
         .elasticY(true)
         .xAxisLabel("Math Average Scores by Parents Education ")
         .yAxis().ticks(8);
