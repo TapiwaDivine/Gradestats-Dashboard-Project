@@ -1,7 +1,7 @@
 /*--------------------------------------global---------------------------------------------*/
 body{
     font-family: Arial, sans-serif;
-    font-size: 15px;
+    font-size: 15px; 
     padding: 0;
     margin: 0;
 }
@@ -20,7 +20,8 @@ h2{
 }
 
 hr {
-    padding-bottom: 10px;
+    padding: 0;
+    margin: 0;
 }
 /*-------------------------------------------------Header------------------------------------*/
 header {
@@ -95,7 +96,7 @@ header a:hover{
 
 /*----------------------------------------Main---------------------------------------*/
 
-#gender-selector .chart-selector{
-    text-align: center;
+
+.barchart-info {
+    background-color: #ADDFFF;
 }
-    
