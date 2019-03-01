@@ -100,3 +100,8 @@ header a:hover{
 .barchart-info {
     background-color: #ADDFFF;
 }
+
+.col-sm-6 #genderselector {
+    float: right;
+    background-color: blue;
+}
