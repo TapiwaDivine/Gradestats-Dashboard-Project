@@ -17,23 +17,27 @@
     <script type="text/javascript" src="static/js/dc.min.js"></script>
     <script type="text/javascript" src="static/js/queue.min.js"></script>
     <script type="text/javascript" src="static/js/graph.js"></script>
+    <!-- Uncomment this to view rowChart of score buckets -->
+    <script type="text/javascript" src="static/js/sample.js"></script>
 </head>
 
 <body>
-    <header>
-        <div class="fluid-container">
-            <div id="branding">
-                <h1 id="logo">GradeStats</h1>
+    <nav class="navbar navbar-dark bg-primary">
+        <a class="navbar-brand" style="font-family: 'Black Ops One', cursive; font-size: 3rem" href="#">GRADESTATS</a>
+        <div class="pos-f-t">
+            <div class="collapse" id="navbarToggleExternalContent">
+                <div class="bg-primary p-4">
+                    <h4 class="text-white">Collapsed content</h4>
+                    <span class="text-muted">Toggleable via the navbar brand.</span>
+                </div>
             </div>
+            <nav class="navbar navbar-dark bg-primary">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            </nav>
         </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html">About</a></li>
-                <li><a href="index.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    </nav>
     <section id="showcase">
         <div class="bg-image">
             <h1>Students Exams Scores Dashboard</h1>
@@ -41,7 +45,7 @@
         </div>
     </section>
     <hr>
-    <div class="fluid-container">
+    <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-12">
                 <h2>Visual Analysis of Students perfomance in Math</h2>
@@ -51,7 +55,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6" id="gender-selector">View By Gender   </div>
-            <div class="col-sm-6" id="lunch-quality-selector">View By Ethnic Group   </div>
+            <div class="col-sm-6" id="parents-level-of-education-selector">View By Parental<br>Level of Education   </div>
             
         </div>
     </div>
@@ -59,6 +63,7 @@
     <div class="fluid-container">
         <div class="row">
             <div class="col-xs-12 col-sm-4 text-center">
+                <div class="card-panel teal lighten-2">This is a card panel with a teal lighten-2 class</div>
                 <div id="average-math-score"></div>
             </div>
             <div class="col-xs-12 col-sm-4 text-center">

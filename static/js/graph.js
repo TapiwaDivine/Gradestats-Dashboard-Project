@@ -15,7 +15,7 @@ function graphMaker(error, studentsData){
     })
     
     show_gender_selector(ndx);
-    show_ethnicity_selector(ndx);
+    show_parental_level_of_education_selector(ndx);
     show_average_math_score(ndx);
     show_math_score_by_test_prep_coarse(ndx);
     show_math_pass_lunch(ndx);
@@ -25,6 +25,7 @@ function graphMaker(error, studentsData){
     show_average_writing_score(ndx);
     show_writing_percentage_by_test_prep_coarse(ndx);
     show_writing_pass_by_lunch(ndx);
+    show_math_score_range(ndx);
     
     // callback for rendering created functions
     dc.renderAll();
@@ -38,11 +39,11 @@ function show_gender_selector(ndx){
         .dimension(dim)
         .group(group);
 }
-function show_ethnicity_selector(ndx){
-    var dim = ndx.dimension(dc.pluck('race/ethnicity'));
+function show_parental_level_of_education_selector(ndx){
+    var dim = ndx.dimension(dc.pluck('parental-level-of-education'));
     var group = dim.group();
 //select menu to scores by the quality of student's lunch   
-    dc.selectMenu("#lunch-quality-selector")
+    dc.selectMenu("#parents-level-of-education-selector")
         .dimension(dim)
         .group(group);
 }
@@ -51,7 +52,7 @@ function show_ethnicity_selector(ndx){
 
 //function for plucking data and calculating math average score
 function show_average_math_score(ndx) {
-    var mathDim = ndx.dimension(dc.pluck('parental-level-of-education'));
+    var mathDim = ndx.dimension(dc.pluck('race/ethnicity'));
    
     function add_item(p, v) {
         p.count++;
@@ -79,9 +80,9 @@ function show_average_math_score(ndx) {
 //creating the barchart   
 var averageMathscore = mathDim.group().reduce(add_item, remove_item, initialise);    
     dc.barChart("#average-math-score")
-        .width(500)
+        .width(400)
         .height(300)
-        .margins({top: 40, right: 50, bottom: 50, left: 40})
+        .margins({top: 10, right: 50, bottom: 50, left: 50})
         .dimension(mathDim)
         .group(averageMathscore)
         .valueAccessor(function (d) {
@@ -90,12 +91,11 @@ var averageMathscore = mathDim.group().reduce(add_item, remove_item, initialise)
         .transitionDuration(500)
         .x(d3.scale.ordinal())
         .xUnits(dc.units.ordinal)
-        .legend(dc.legend().x(340).y(300))
         .yAxisLabel('Scores')
         .xAxisLabel("Math Scores By Parental Education");
 }
 
-
+//function to see the pass percentage of math by student who took the test prep course and those who didnt  
 function show_math_score_by_test_prep_coarse(ndx){
     var passDim = ndx.dimension(dc.pluck('test-preparation-course'));
     
@@ -122,10 +122,10 @@ function show_math_score_by_test_prep_coarse(ndx){
     );
  
     dc.pieChart("#math-pass-rate")
-        .height(350)
+        .height(300)
         .radius(120)
         .dimension(passDim)
-        .transitionDuration(1500)
+        .transitionDuration(1000)
         .group(math_score_by_prep_course)
         .valueAccessor(function(d) {
             if(d.value.total > 0) {
@@ -165,7 +165,7 @@ function show_math_pass_lunch(ndx) {
     );
     
     dc.pieChart("#math-pass-by-lunch")
-        .height(350)
+        .height(300)
         .radius(120)
         .innerRadius(50)
         .dimension(dim)
@@ -185,7 +185,7 @@ function show_math_pass_lunch(ndx) {
 
 //------------------------------------------------------------------------------------ReadingScore Data display
 function show_average_reading_score(ndx) {
-    var readingDim = ndx.dimension(dc.pluck('parental-level-of-education'));
+    var readingDim = ndx.dimension(dc.pluck('race/ethnicity'));
     
     function add_item(p, v) {
         p.count++;
@@ -213,7 +213,7 @@ function show_average_reading_score(ndx) {
 
 var averageReadingScore = readingDim.group().reduce(add_item, remove_item, initialise);    
     dc.barChart("#average-reading-score")
-        .width(500)
+        .width(400)
         .height(300)
         .margins({top: 10, right: 50, bottom: 50, left: 50})
         .dimension(readingDim)
@@ -256,7 +256,7 @@ function show_reading_score_by_test_prep_coarse(ndx){
     );
     
     dc.pieChart("#reading-pass-pec")
-        .height(350)
+        .height(300)
         .radius(120)
         .dimension(pecDim)
         .transitionDuration(500)
@@ -298,7 +298,7 @@ function show_reading_pass_by_lunch(ndx) {
     );
     
     dc.pieChart("#reading-pass-by-lunch")
-        .height(350)
+        .height(300)
         .radius(120)
         .innerRadius(50)
         .dimension(readingDim)
@@ -316,7 +316,7 @@ function show_reading_pass_by_lunch(ndx) {
 
 //-------------------------------------------------------------------------------------------------writingScores Data display
 function show_average_writing_score(ndx) {
-    var writingDim = ndx.dimension(dc.pluck('parental-level-of-education'));
+    var writingDim = ndx.dimension(dc.pluck('race/ethnicity'));
     
     function add_item(p, v) {
         p.count++;
@@ -343,7 +343,7 @@ function show_average_writing_score(ndx) {
     
 var averageWritingscore = writingDim.group().reduce(add_item, remove_item, initialise);    
     dc.barChart("#average-writing-score")
-        .width(500)
+        .width(400)
         .height(300)
         .margins({top: 10, right: 50, bottom: 50, left: 50})
         .dimension(writingDim)
@@ -386,7 +386,7 @@ function show_writing_percentage_by_test_prep_coarse(ndx){
     );
     
     dc.pieChart("#writing-pass-pecentage")
-        .height(350)
+        .height(300)
         .radius(120)
         .dimension(pecDim)
         .transitionDuration(500)
@@ -427,7 +427,7 @@ function show_writing_pass_by_lunch(ndx) {
     );
     
     dc.pieChart("#writing-pass-by-lunch")
-        .height(350)
+        .height(300)
         .radius(120)
         .innerRadius(50)
         .dimension(dim)
@@ -439,32 +439,52 @@ function show_writing_pass_by_lunch(ndx) {
                 return 0;
             }
         })
-        .transitionDuration(1500)
+        .transitionDuration(500)
         .legend(dc.legend().x(320).y(40));
 }
 
 //-------------------------------------------------------------------------------------------Math score range
 
-function show_math_score_range(ndx){
-    var score_dim = ndx.dimension(dc.pluck('mathScore'));
-    var scores_range = score_dim.group().reduce(
-     function add_item(p, v) {
-        p.total++;
-        if (v.mathScore <= 30){
-        p.match++;
+function show_math_score_range(ndx) {
+    var  dim = ndx.dimension(function(d){
+        if(d['mathScore'] < 10){
+            return "0-9";
         }
-        return p;
-        },
-    function remove_item(p, v) {
-        p.total--;
-        if(v.writingScore < 50) {
-            p.match--;
+        else if(d['mathScore'] < 20){
+            return "10-19";
         }
-        return p;
-        },
+        else if(d['mathScore'] < 30){
+            return "20-29";
+        }
+        else if(d['mathScore'] < 40){
+            return "30-39";
+        }
+        else if(d['mathScore'] < 50){
+            return "40-49";
+        }
+        else if(d['mathScore'] < 60){
+            return "50-59";
+        }
+        else if(d['mathScore'] < 70){
+            return "60-69"; 
+        }
+        else if(d['mathScore'] < 80){
+            return "70-79";
+        }
+        else if(d['mathScore'] <90){
+            return "80-89";
+        }
+        else return "90+";
+    });
     
-    function initialise() {
-        return {total: 0, match: 0};
-        }
-    )    
+var scoreRange = dim.group();
+
+
+dc.pieChart("#math-score-ranges")
+        .height(250)
+        .radius(100)
+        .transitionDuration(1000)
+        .dimension(dim)
+        .group(scoreRange)
+        .minAngleForLabel(.2);
 }
