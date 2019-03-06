@@ -26,6 +26,8 @@ function graphMaker(error, studentsData){
     show_writing_percentage_by_test_prep_coarse(ndx);
     show_writing_pass_by_lunch(ndx);
     show_math_score_range(ndx);
+    show_reading_score_range(ndx);
+    show_writing_score_range(ndx);
     
     // callback for rendering created functions
     dc.renderAll();
@@ -480,11 +482,115 @@ function show_math_score_range(ndx) {
 var scoreRange = dim.group();
 
 
-dc.pieChart("#math-score-ranges")
-        .height(250)
-        .radius(100)
+dc.rowChart("#math-score-ranges")
+        .height(300)
+        .width(900)
+        .margins({top: 5, left: 10, right: 10, bottom: 20})
+        .colors(d3.scale.category10())
         .transitionDuration(1000)
         .dimension(dim)
         .group(scoreRange)
-        .minAngleForLabel(.2);
+        .minAngleForLabel(.2)
+        .elasticX(true)
+        .xAxis().ticks(14);
+}
+
+//-------------------------------------------------------------------------------------------reading score range
+
+function show_reading_score_range(ndx) {
+    var  dim = ndx.dimension(function(d){
+        if(d['readingScore'] < 10){
+            return "0-9";
+        }
+        else if(d['readingScore'] < 20){
+            return "10-19";
+        }
+        else if(d['readingScore'] < 30){
+            return "20-29";
+        }
+        else if(d['readingScore'] < 40){
+            return "30-39";
+        }
+        else if(d['readingScore'] < 50){
+            return "40-49";
+        }
+        else if(d['readingScore'] < 60){
+            return "50-59";
+        }
+        else if(d['readingScore'] < 70){
+            return "60-69"; 
+        }
+        else if(d['readingScore'] < 80){
+            return "70-79";
+        }
+        else if(d['readingScore'] <90){
+            return "80-89";
+        }
+        else return "90+";
+    });
+    
+var scoreRange = dim.group();
+
+
+dc.rowChart("#reading-score-ranges")
+        .height(300)
+        .width(900)
+        .margins({top: 5, left: 10, right: 10, bottom: 20})
+        .colors(d3.scale.category10())
+        .transitionDuration(1000)
+        .dimension(dim)
+        .group(scoreRange)
+        .minAngleForLabel(.2)
+        .elasticX(true)
+        .xAxis().ticks(14);
+}
+
+//--------------------------------------------------------------------------------------writing score ranges
+
+function show_writing_score_range(ndx) {
+    var  dim = ndx.dimension(function(d){
+        if(d['writingScore'] < 10){
+            return "0-9";
+        }
+        else if(d['writingScore'] < 20){
+            return "10-19";
+        }
+        else if(d['writingScore'] < 30){
+            return "20-29";
+        }
+        else if(d['writingScore'] < 40){
+            return "30-39";
+        }
+        else if(d['writingScore'] < 50){
+            return "40-49";
+        }
+        else if(d['writingScore'] < 60){
+            return "50-59";
+        }
+        else if(d['writingScore'] < 70){
+            return "60-69"; 
+        }
+        else if(d['writingScore'] < 80){
+            return "70-79";
+        }
+        else if(d['writingScore'] <90){
+            return "80-89";
+        }
+        else return "90+";
+    });
+    
+var scoreRange = dim.group();
+
+
+dc.rowChart("#writing-score-ranges")
+        .height(300)
+        .width(900)
+        .margins({top: 5, left: 10, right: 10, bottom: 20})
+        .colors(d3.scale.category10())
+        .transitionDuration(1000)
+        .dimension(dim)
+        .group(scoreRange)
+        .minAngleForLabel(.2)
+        .elasticX(true)
+        .xAxis().ticks(14);
 }
