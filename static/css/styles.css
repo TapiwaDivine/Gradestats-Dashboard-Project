@@ -25,11 +25,9 @@ hr {
 }
 /*-------------------------------------------------Header------------------------------------*/
 a .navbar-brand {
-    color: #fff;
-    
-    !important;
+    color: #fff!important;
 }
-
+ 
 
 
 #showcase .bg-image{

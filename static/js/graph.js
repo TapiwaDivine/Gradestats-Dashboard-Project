@@ -85,6 +85,7 @@ var averageMathscore = mathDim.group().reduce(add_item, remove_item, initialise)
         .width(400)
         .height(300)
         .margins({top: 10, right: 50, bottom: 50, left: 50})
+        .colors(d3.scale.category10())
         .dimension(mathDim)
         .group(averageMathscore)
         .valueAccessor(function (d) {
@@ -93,8 +94,7 @@ var averageMathscore = mathDim.group().reduce(add_item, remove_item, initialise)
         .transitionDuration(500)
         .x(d3.scale.ordinal())
         .xUnits(dc.units.ordinal)
-        .yAxisLabel('Scores')
-        .xAxisLabel("Math Scores By Parental Education");
+        .yAxisLabel('Scores');
 }
 
 //function to see the pass percentage of math by student who took the test prep course and those who didnt  
@@ -481,7 +481,6 @@ function show_math_score_range(ndx) {
     
 var scoreRange = dim.group();
 
-
 dc.rowChart("#math-score-ranges")
         .height(300)
         .width(900)
@@ -490,11 +489,9 @@ dc.rowChart("#math-score-ranges")
         .transitionDuration(1000)
         .dimension(dim)
         .group(scoreRange)
-        .minAngleForLabel(.2)
         .elasticX(true)
         .xAxis().ticks(14);
 }
-
 //-------------------------------------------------------------------------------------------reading score range
 
 function show_reading_score_range(ndx) {
@@ -540,7 +537,6 @@ dc.rowChart("#reading-score-ranges")
         .transitionDuration(1000)
         .dimension(dim)
         .group(scoreRange)
-        .minAngleForLabel(.2)
         .elasticX(true)
         .xAxis().ticks(14);
 }
@@ -590,7 +586,6 @@ dc.rowChart("#writing-score-ranges")
         .transitionDuration(1000)
         .dimension(dim)
         .group(scoreRange)
-        .minAngleForLabel(.2)
         .elasticX(true)
         .xAxis().ticks(14);
 }
