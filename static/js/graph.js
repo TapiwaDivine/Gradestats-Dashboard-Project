@@ -12,19 +12,19 @@ function graphMaker(error, studentsData){
         d.mathScore = parseInt(d.mathScore);
         d.readingScore = parseInt(d.readingScore);
         d.writingScore = parseInt(d.writingScore);
-    })
+    });
     
     show_gender_selector(ndx);
     show_parental_level_of_education_selector(ndx);
     show_average_reading_score(ndx);
     show_reading_score_by_test_prep_coarse(ndx);
-    show_reading_pass_by_lunch(ndx);
+    show_reading_fails_by_lunch(ndx);
     show_average_math_score(ndx);
     show_math_score_by_test_prep_coarse(ndx);
-    show_math_pass_lunch(ndx);
+    show_math_fails_lunch(ndx);
     show_average_writing_score(ndx);
     show_writing_percentage_by_test_prep_coarse(ndx);
-    show_writing_pass_by_lunch(ndx);
+    show_writing_fails_by_lunch(ndx);
     show_math_score_by_range(ndx);
     show_reading_score_range(ndx);
     show_writing_score_range(ndx);
@@ -83,7 +83,7 @@ var averageReadingScore = readingDim.group().reduce(add_item, remove_item, initi
     dc.barChart("#average-reading-score")
         .width(400)
         .height(300)
-        .margins({top: 10, right: 50, bottom: 50, left: 50})
+        .margins({top: 50, right: 50, bottom: 50, left: 30})
         .dimension(readingDim)
         .group(averageReadingScore)
         .valueAccessor(function (d) {
@@ -92,8 +92,10 @@ var averageReadingScore = readingDim.group().reduce(add_item, remove_item, initi
         .transitionDuration(500)
         .x(d3.scale.ordinal())
         .xUnits(dc.units.ordinal)
+        .colorAccessor(d => d.key)
+        .ordinalColors(["#75a3a3","#79CED7", "#39ac73", "#F5821F", "#b366ff"])
+        .yAxisLabel("Scores")
         .elasticY(true)
-        .xAxisLabel("Reading Average Scores By Parental Education")
         .yAxis().ticks(8);
         
 }
@@ -125,7 +127,7 @@ function show_reading_score_by_test_prep_coarse(ndx){
     
     dc.pieChart("#reading-pass-pec")
         .height(300)
-        .radius(120)
+        .radius(110)
         .dimension(pecDim)
         .transitionDuration(500)
         .group(reading_score_by_prep_course)
@@ -136,24 +138,26 @@ function show_reading_score_by_test_prep_coarse(ndx){
                 return 0;
             }
         })
-        .legend(dc.legend().x(320).y(50));
+        .legend(dc.legend().x(220).y(10).gap(5))
+        .colorAccessor(d => d.key)
+        .ordinalColors(["#75a3a3","#79CED7"]);
 }
 
 
-function show_reading_pass_by_lunch(ndx) {
+function show_reading_fails_by_lunch(ndx) {
     var  readingDim = ndx.dimension(dc.pluck('lunch'));
     
-    var readingScorePassByLunchTaken = readingDim.group().reduce(
+    var readingScoreFailsByLunchTaken = readingDim.group().reduce(
         function add_item(p, v) {
         p.total++;
-        if (v.readingScore >= 50){
+        if (v.readingScore <= 49){
         p.match++;
         }
         return p;
         },
     function remove_item(p, v) {
         p.total--;
-        if(v.readingScore < 50) {
+        if(v.readingScore > 49) {
             p.match--;
         }
         return p;
@@ -167,10 +171,10 @@ function show_reading_pass_by_lunch(ndx) {
     
     dc.pieChart("#reading-pass-by-lunch")
         .height(300)
-        .radius(120)
+        .radius(110)
         .innerRadius(50)
         .dimension(readingDim)
-        .group(readingScorePassByLunchTaken)
+        .group(readingScoreFailsByLunchTaken)
         .valueAccessor(function(d) {
             if(d.value.total > 0) {
                 return (d.value.match / d.value.total).toFixed(2) * 100;
@@ -178,8 +182,10 @@ function show_reading_pass_by_lunch(ndx) {
                 return 0;
             }
         })
-        .transitionDuration(1500)
-        .legend(dc.legend().x(320).y(40));
+        .transitionDuration(500)
+        .legend(dc.legend().x(220).y(10).gap(5))
+        .colorAccessor(d => d.key)
+        .ordinalColors(["#75a3a3","#79CED7"]);
 }
 
 
@@ -217,8 +223,7 @@ var averageMathscore = mathDim.group().reduce(add_item, remove_item, initialise)
     dc.barChart("#average-math-score")
         .width(400)
         .height(300)
-        .margins({top: 10, right: 50, bottom: 50, left: 50})
-        .colors(d3.scale.category10())
+        .margins({top: 50, right: 50, bottom: 50, left: 30})
         .dimension(mathDim)
         .group(averageMathscore)
         .valueAccessor(function (d) {
@@ -226,6 +231,9 @@ var averageMathscore = mathDim.group().reduce(add_item, remove_item, initialise)
         })
         .transitionDuration(500)
         .x(d3.scale.ordinal())
+        .elasticY(true)
+        .colorAccessor(d => d.key)
+        .ordinalColors(["#75a3a3","#79CED7", "#39ac73", "#F5821F", "#cc0099"])
         .xUnits(dc.units.ordinal)
         .yAxisLabel('Scores');
 }
@@ -244,7 +252,7 @@ function show_math_score_by_test_prep_coarse(ndx){
         },
     function remove_item(p, v) {
         p.total--;
-        if(v.mathScore < 50) {
+        if(v.mathScore > 50) {
             p.match--;
         }
         return p;
@@ -258,9 +266,9 @@ function show_math_score_by_test_prep_coarse(ndx){
  
     dc.pieChart("#math-pass-rate")
         .height(300)
-        .radius(120)
+        .radius(110)
         .dimension(passDim)
-        .transitionDuration(1000)
+        .transitionDuration(500)
         .group(math_score_by_prep_course)
         .valueAccessor(function(d) {
             if(d.value.total > 0) {
@@ -269,17 +277,17 @@ function show_math_score_by_test_prep_coarse(ndx){
                 return 0;
             }
         })
-        .legend(dc.legend().x(320).y(40))
+        .legend(dc.legend().x(220).y(10))
 }
 
-
-function show_math_pass_lunch(ndx) {
+//
+function show_math_fails_lunch(ndx) {
     var  dim = ndx.dimension(dc.pluck('lunch'));
     
-    var mathScorePassByLunchTaken = dim.group().reduce(
+    var mathScoreFailsByLunchTaken = dim.group().reduce(
         function add_item(p, v) {
         p.total++;
-        if (v.mathScore >= 50){
+        if (v.mathScore <= 49){
         p.match++;
         }
         return p;
@@ -298,12 +306,12 @@ function show_math_pass_lunch(ndx) {
         
     );
     
-    dc.pieChart("#math-pass-by-lunch")
+    dc.pieChart("#math-fails-by-lunch")
         .height(300)
-        .radius(120)
+        .radius(110)
         .innerRadius(50)
         .dimension(dim)
-        .group(mathScorePassByLunchTaken)
+        .group(mathScoreFailsByLunchTaken)
         .valueAccessor(function(d) {
             if(d.value.total > 0) {
                 return (d.value.match / d.value.total).toFixed(2) * 100;
@@ -311,8 +319,8 @@ function show_math_pass_lunch(ndx) {
                 return 0;
             }
         })
-        .transitionDuration(1500)
-        .legend(dc.legend().x(320).y(40));
+        .transitionDuration(500)
+        .legend(dc.legend().x(220).y(10));
 }
         
 
@@ -348,7 +356,7 @@ var averageWritingscore = writingDim.group().reduce(add_item, remove_item, initi
     dc.barChart("#average-writing-score")
         .width(400)
         .height(300)
-        .margins({top: 10, right: 50, bottom: 50, left: 50})
+        .margins({top: 50, right: 50, bottom: 50, left: 30})
         .dimension(writingDim)
         .group(averageWritingscore)
         .valueAccessor(function (d) {
@@ -358,7 +366,9 @@ var averageWritingscore = writingDim.group().reduce(add_item, remove_item, initi
         .x(d3.scale.ordinal())
         .xUnits(dc.units.ordinal)
         .elasticY(true)
-        .xAxisLabel("Writing Average Score by Parental Educational")
+        .colorAccessor(d => d.key)
+        .ordinalColors(["#75a3a3","#79CED7", "#39ac73", "#F5821F", "#cc0099"])
+        .yAxisLabel("Score")
         .yAxis().ticks(8);
         
 }
@@ -390,7 +400,7 @@ function show_writing_percentage_by_test_prep_coarse(ndx){
     
     dc.pieChart("#writing-pass-pecentage")
         .height(300)
-        .radius(120)
+        .radius(110)
         .dimension(pecDim)
         .transitionDuration(500)
         .group(writing_percent_by_prep_course)
@@ -401,23 +411,23 @@ function show_writing_percentage_by_test_prep_coarse(ndx){
                 return 0;
             }
         })
-        .legend(dc.legend().x(320).y(50));
+        .legend(dc.legend().x(220).y(10));
 }
 
-function show_writing_pass_by_lunch(ndx) {
+function show_writing_fails_by_lunch(ndx) {
     var  dim = ndx.dimension(dc.pluck('lunch'));
     
-    var writingScorePassByLunchTaken = dim.group().reduce(
+    var writingScoreFailsByLunchTaken = dim.group().reduce(
         function add_item(p, v) {
         p.total++;
-        if (v.writingScore >= 50){
+        if (v.writingScore <= 49){
         p.match++;
         }
         return p;
         },
     function remove_item(p, v) {
         p.total--;
-        if(v.writingScore < 50) {
+        if(v.writingScore > 49) {
             p.match--;
         }
         return p;
@@ -431,10 +441,10 @@ function show_writing_pass_by_lunch(ndx) {
     
     dc.pieChart("#writing-pass-by-lunch")
         .height(300)
-        .radius(120)
+        .radius(110)
         .innerRadius(50)
         .dimension(dim)
-        .group(writingScorePassByLunchTaken)
+        .group(writingScoreFailsByLunchTaken)
         .valueAccessor(function(d) {
             if(d.value.total > 0) {
                 return (d.value.match / d.value.total).toFixed(2) * 100;
@@ -443,7 +453,7 @@ function show_writing_pass_by_lunch(ndx) {
             }
         })
         .transitionDuration(500)
-        .legend(dc.legend().x(320).y(40));
+        .legend(dc.legend().x(220).y(10));
 }
 
 
@@ -489,7 +499,7 @@ dc.rowChart("#reading-score-ranges")
         .width(900)
         .margins({top: 5, left: 10, right: 10, bottom: 20})
         .colors(d3.scale.category10())
-        .transitionDuration(1000)
+        .transitionDuration(500)
         .dimension(dim)
         .group(scoreRange)
         .elasticX(true)
@@ -539,7 +549,7 @@ dc.rowChart("#math-scores-range")
         .width(900)
         .margins({top: 5, left: 10, right: 10, bottom: 20})
         .colors(d3.scale.category10())
-        .transitionDuration(1000)
+        .transitionDuration(500)
         .dimension(dim)
         .group(scoreRange)
         .elasticX(true)
@@ -590,7 +600,7 @@ dc.rowChart("#writing-score-ranges")
         .width(900)
         .margins({top: 5, left: 10, right: 10, bottom: 20})
         .colors(d3.scale.category10())
-        .transitionDuration(1000)
+        .transitionDuration(500)
         .dimension(dim)
         .group(scoreRange)
         .elasticX(true)

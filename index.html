@@ -8,8 +8,9 @@
 
     <title>College Results Dashboard</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,700i,900|Black+Ops+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,700i,900|Black+Ops+One|=Exo+2" rel="stylesheet">
     <link rel="stylesheet" href="static/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="static/css/dc.min.css" type="text/css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="static/css/styles.css" type="text/css" />
 
@@ -18,128 +19,211 @@
     <script type="text/javascript" src="static/js/dc.min.js"></script>
     <script type="text/javascript" src="static/js/queue.min.js"></script>
     <script type="text/javascript" src="static/js/graph.js"></script>
-    <!-- Uncomment this to view rowChart of score buckets -->
-    <script type="text/javascript" src="static/js/sample.js"></script>
 </head>
 
 <body>
-    <nav class="navbar navbar-dark bg-primary">
-        <a class="navbar-brand" style="font-family: 'Black Ops One', cursive; font-size: 48px" href="#">GRADESTATS</a>
-        <div class="pos-f-t">
-            <div class="collapse" id="navbarToggleExternalContent">
-                <div class="bg-primary p-4">
-                    <h4 class="text-white">Collapsed content</h4>
-                    <span class="text-muted">Toggleable via the navbar brand.</span>
-                </div>
-            </div>
-            <nav class="navbar navbar-dark bg-primary">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-            </nav>
-        </div>
-    </nav>
-    <section id="showcase">
-        <div class="bg-image">
-            <h1>Students Exams Scores Dashboard</h1>
-            <p>Analysing the influence behind students' scores in Math, Reading and Writing<br>We look at the influence by sex,enthnicity, parents's educational level,test preparation course and even lunch</p>
-        </div>
-    </section>
-    <hr>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12">
-                <h2>Visual Analysis of Students perfomance in Math</h2>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6" id="gender-selector">View By Gender   </div>
-            <div class="col-sm-6" id="parents-level-of-education-selector">View By Parental<br>Level of Education   </div>
-            
-        </div>
-    </div>
-    <hr>
-    <div class="fluid-container readingScore-section">
-        <div class="row">
-            <div class="col-xs-12 col-sm-4 text-center">
-                <div class="dc-chart" id="average-reading-score"></div>
-            </div>
-            <div class="col-xs-12 col-sm-4 text-center">
-                <div id="reading-pass-pec"></div>
-            </div>
-            <div class="col-xs-12 col-sm-4 text-center">
-                <div id="reading-pass-by-lunch"></div>
-            </div>
-        </div>
-    </div>
-    <hr>
-    <div class="fluid-container math section">
-        <div class="row">
-            <div class="col-xs-12 col-sm-4 text-center">
-                <div class="card border-primary mb-3 bg-info mb-3">
-                    <div class="card-header">Students Average Scores In Math</div>
-                        <div class="card-body">
-                        <h5 class="card-title">Primary card title</h5>
-                        <div id="average-math-score"></div>
-                        <p class="card-text">A review of the Math average score by Ethnicity. And Ethnic group E scored the highest Average Score while Group A scored the lowest Average </p>
+    <header class="fluid-container">
+        <nav class="navbar navbar-dark bg-primary">
+            <a class="navbar-brand" style="font-family: 'Black Ops One', cursive; font-size: 48px" href="#">GRADESTATS</a>
+                <div class="pos-f-t">
+                    <div id="mySidebar" class="sidebar">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+                        <a href="#">Enrol Now</a>
+                        <a href="#">Reading Overview</a>
+                        <a href="#">Math Overview</a>
+                        <a href="#">Writing Overview</a>
+                    </div>
+                    <div id="main">
+                        <button class="openbtn" onclick="openNav()">☰</button>
                     </div>
                 </div>
+        </nav>
+    </header>
+    <div class="fluid-container">
+        <section id="showcase">
+            <div class="bg-image">
+                <h1>Students Scores Dashboard</h1>
             </div>
-            <div class="col-xs-12 col-sm-4 text-center">
-                <div class="card text-white bg-info mb-3">
-                    <div class="card-header">Header</div>
-                        <div class="card-body">
-                        <h5 class="card-title">Primary card title</h5>
-                        <div id="math-pass-rate"></div>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
+        </section>
+    </div>
+    <div class="fluid-containerselectMenu" style="background-color: #fff">
+        <div class="container selectMenu-container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div "custom-select" style="width:200px; float: right; padding-top: 25px" id="gender-selector">View By Gender </div>   
                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-4 text-center">
-                <div id="math-pass-by-lunch"></div>
+                <div class="col-sm-6">
+                    <div "custom-select" style="width:200px;" id="parents-level-of-education-selector">View By Parental<br>Level of Education    </div>
+                </div>
             </div>
         </div>
     </div>
-    <hr>
-    <div class="fluid-container writingScore-section">
+    <div class="fluid-container reading-section">
+        <div class="container">
+            <div class="col-xs-12">
+                <div class="page-header">
+                    <h2 class="text-center">Reading Overview</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 text-center">
+                    <div class="card-header">Average Reading Scores by Ethnic Group</div>
+                        <div id="average-reading-score"></div>
+                        <p class="card-header">Comparing Average Math scores by <br> Ethinical Group to see if <br>ethinicty had an influence in <br> Student abilities in Math scores</p>
+                </div>
+                <div class="col-xs-12 col-sm-4 text-center">
+                    <div class="card-header">Reading Pass Percent By Test Prep Course</div>
+                        <div id="reading-pass-pec"></div>
+                        <p class="card-header">Comparing Average Math scores by <br> Ethinical Group to see if <br>ethinicty had an influence in <br> Student abilities in Math scores</p>
+                </div>
+                <div class="col-xs-12 col-sm-4 text-center">
+                    <div class="card-header">Reading Fails By Students' Lunch</div>
+                    <div id="reading-pass-by-lunch"></div>
+                    <p class="card-header">Comparing Average Math scores by <br> Ethinical Group to see if <br>ethinicty had an influence in <br> Student abilities in Math scores</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container math-section">
+        <div class="col-xs-12">
+            <div class="page-header">
+                <h2>Math Overview</h2>
+            </div>
+        </div>
         <div class="row">
             <div class="col-xs-12 col-sm-4 text-center">
+                <div class="card-header">Average Math Scores by Ethnic Group</div>
+                    <div id="average-math-score"></div>
+                    <p class="card-header">Comparing Average Math scores by <br> Ethinical Group to see if <br>ethinicty had an influence in <br> Student abilities in Math scores</p>
+            </div>
+            <div class="col-xs-12 col-sm-4 text-center">
+                <div class="card-header">Math Pass Percentages By Test Prep Course</div>
+                    <div id="math-pass-rate"></div>
+                    <p class="card-header">Comparing Math Pass Percentages between <br>Students who completed the Test Preparation <br>Coarse and Students who had no <br>Test Preparation Coarse.</p>
+            </div>
+            <div class="col-xs-12 col-sm-4 text-center">
+                <div class="card-header">Math Fails By Quality of Student Lunch</div>
+                    <div id="math-fails-by-lunch"></div>
+                    <p class="card-header">Comparing the Percentages of Students <br>Who failed Maths by the Quality of the<br> Lunch they get everyday</p>
+            </div>
+        </div>
+    </div>
+    <div class="container writing-section">
+        <div class="col-xs-12">
+            <div class="page-header">
+                <h2>Writing Overview</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 text-center">
+                <div class="card-header">Average Math Scores by Ethnic Group</div>
                 <div id="average-writing-score"></div>
+                    <p class="card-header">Comparing Average Math scores by <br> Ethinical Group to see if <br>ethinicty had an influence in <br> Student abilities in Math scores</p>
             </div>
             <div class="col-xs-12 col-sm-4 text-center">
+                <div class="card-header">Average Math Scores by Ethnic Group</div>
                 <div id="writing-pass-pecentage"></div>
+                    <p class="card-header">Comparing Average Math scores by <br> Ethinical Group to see if <br>ethinicty had an influence in <br> Student abilities in Math scores</p>
             </div>
             <div class="col-xs-12 col-sm-4 text-center">
+                <div class="card-header">Average Math Scores by Ethnic Group</div>
                 <div id="writing-pass-by-lunch"></div>
+                    <p class="card-header">Comparing Average Math scores by <br> Ethinical Group to see if <br>ethinicty had an influence in <br> Student abilities in Math scores</p>
             </div>
         </div>
     </div>
-    <hr>
+<!--------------------------------------------------------------------Scores Range----------------------------------------->
     <div class="container">
+        <div class="col-xs-12">
+                <div class="page-header">
+                    <h2>Reading Score Ranges</h2>
+                </div>
+        </div>
         <div class="row">
-             <div class="col-xs-12 col-sm-12 text-center">
-                <div id="reading-score-ranges"></div>
-            </div>
+                <div class="col-xs-12 col-sm-12 text-center">
+                    <div class="card-header">Average Reading Scores by Ethnic Group</div>
+                    <div id="reading-score-ranges"></div>
+                    <p class="card-header">Comparing Average Math scores by Ethinical Group to see if ethinicty had an influence in  Student abilities in Math scores</p>
+                </div>
+                
         </div>
     </div>
-    <hr>
     <div class="container">
+        <div class="col-xs-12">
+            <div class="page-header">
+                <h3 class="text-uppercase">Math Score Ranges</h3>
+            </div>
+        </div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 text-center">
+                <div class="card-header">Average Reading Scores by Ethnic Group</div>
                 <div id="math-scores-range"></div>
+                <p class="card-header">Comparing Average Math scores by Ethinical Group to see if ethinicty had an influence in  Student abilities in Math scores</p>
             </div>
         </div>
     </div>
-    <hr>
     <div class="container">
+        <div class="col-xs-12">
+            <div class="page-header">
+                <h3 class="text-uppercase">Writing Score Ranges</h3>
+            </div>
+        </div>
         <div class="row">
              <div class="col-xs-12 col-sm-12 text-center">
+                 <div class="card-header">Average Reading Scores by Ethnic Group</div>
                 <div id="writing-score-ranges"></div>
+                <p class="card-header">Comparing Average Math scores by Ethinical Group to see if ethinicty had an influence in  Student abilities in Math scores</p>
             </div>
         </div>
     </div>
+<!--------------------------------------------------------------------Footer----------------------------------------->
+    <div class="fluid-container">
+        <div class="footer bg-primary text-white ">
+            <div class="row">
+                <div class="col-md-6 py-5">
+                    <div class="container">
+                        <ul class="list-unstyled list-inline text-center py-2">
+                            <li class="list-inline-item">
+                                <h5 class="mb-1">Register for free</h5>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!" class="btn btn-outline-white btn-rounded">Sign up!</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 py-5">
+                    <div class="container">
+                        <h5 class="text-uppercase font-weight-bold">Footer text 2</h5>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio deserunt fuga perferendis modi earum commodi aperiam temporibus quod nulla nesciunt aliquid debitis ullam omnis quos ipsam, aspernatur id excepturi hic.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="page-footer font-small ">
+            <div style="background-color: #0F2074;">
+                <div class="footer-copyright text-center py-3">© 2019 Copyright:
+                    <a href="#">gradestats.com</a>
+                </div>
+            </div>
+        </footer>
+</div>
+<!----------------------------------------------------------------------------------------Footer----------------------------------------------->
+
+<script type="text/javascript">
+        /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
+    function openNav() {
+      document.getElementById("mySidebar").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
+    }
+    
+    /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+    function closeNav() {
+      document.getElementById("mySidebar").style.width = "0";
+      document.getElementById("main").style.marginLeft = "0";
+    }
+
+</script>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

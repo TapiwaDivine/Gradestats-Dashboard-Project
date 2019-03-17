@@ -1,28 +1,29 @@
 /*--------------------------------------global---------------------------------------------*/
 body{
-    font-family: Arial, sans-serif;
-    font-size: 15px; 
+    font-family: Roboto, sans-serif;
+    background-color: #D6EAF8;
     padding: 0;
     margin: 0;
 }
+
 h2{
+    font-family: sans-serif;
     text-align: center;
-    font-weight: bold;
+    text-decoration: none;
     color: #191970;
-    text-transform: capitalize;
-    text-decoration: underline;
-    padding-bottom: 10px;
+    padding-bottom: 40px;
+    font-size: 36px;
+}
+/*----------------------------------------------------------------container-----------*/
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-top: 70px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
- ul {
-    margin: 0;
-    padding: 0;
-}
-
-hr {
-    padding: 0;
-    margin: 0;
-}
 /*-------------------------------------------------Header------------------------------------*/
 a .navbar-brand {
     color: #fff!important;
@@ -31,13 +32,13 @@ a .navbar-brand {
 
 
 #showcase .bg-image{
-    min-height: 300px;
     background:linear-gradient(
     rgba(0, 0, 0, 0.6),
     rgba(0, 0, 0, 0.6)
     ),
-    url(/static/images/stationery.jpg) no-repeat;
-    background-size: 100% 100%;
+    url(/static/images/students.jpg) no-repeat center center;
+    background-size: cover;
+    height: 100vh;
     text-align: center;
     color: white;
     font-weight: bold;
@@ -50,7 +51,7 @@ a .navbar-brand {
     color: white;
     text-transform: uppercase;
     font-size: 3rem;
-    padding-top: 5rem;
+    padding-top: 9rem;
 }
 
 /*----------------------------------------Main---------------------------------------*/
@@ -60,7 +61,67 @@ a .navbar-brand {
     background-color: #ADDFFF;
 }
 
-.col-sm-6 #genderselector {
-    float: right;
-    background-color: blue;
+.sidebar {
+    height: 250px;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #1a75ff;
+    border-style: solid;
+    border-color: #000;
+    border-width: 1px;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 30px;
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 17px;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: #818181;
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #1a75ff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+}
+
+.openbtn:hover {
+    background-color: #005ce6;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+
+@media screen and (max-height: 450px) {
+    .sidebar {
+        padding-top: 15px;
+    }
+    .sidebar a {
+        font-size: 18px;
+    }
 }
