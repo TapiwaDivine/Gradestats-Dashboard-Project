@@ -278,6 +278,8 @@ function show_math_score_by_test_prep_coarse(ndx){
             }
         })
         .legend(dc.legend().x(220).y(10))
+        .colorAccessor(d => d.key)
+        .ordinalColors(["#39ac73", "#F5821F"]);
 }
 
 //
@@ -320,7 +322,9 @@ function show_math_fails_lunch(ndx) {
             }
         })
         .transitionDuration(500)
-        .legend(dc.legend().x(220).y(10));
+        .legend(dc.legend().x(220).y(10))
+        .colorAccessor(d => d.key)
+        .ordinalColors(["#39ac73", "#F5821F"]);
 }
         
 
@@ -411,7 +415,9 @@ function show_writing_percentage_by_test_prep_coarse(ndx){
                 return 0;
             }
         })
-        .legend(dc.legend().x(220).y(10));
+        .legend(dc.legend().x(220).y(10))
+        .colorAccessor(d => d.key)
+        .ordinalColors(["#F5821F", "#b366ff"]);
 }
 
 function show_writing_fails_by_lunch(ndx) {
@@ -453,7 +459,9 @@ function show_writing_fails_by_lunch(ndx) {
             }
         })
         .transitionDuration(500)
-        .legend(dc.legend().x(220).y(10));
+        .legend(dc.legend().x(220).y(10))
+        .colorAccessor(d => d.key)
+        .ordinalColors(["#F5821F", "#b366ff"]);
 }
 
 
