@@ -43,21 +43,9 @@
         <section id="showcase">
             <div class="bg-image">
                 <h1>Students Scores Dashboard</h1>
-                <p>A Overview Of Scores In Math, Reading & Writing</p>
+                <p>A Overview Of Scores By 1000 Students In Math, Reading & Writing</p>
             </div>
         </section>
-    </div>
-    <div class="fluid-containerselectMenu" style="background-color: #fff">
-        <div class="container selectMenu-container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div "custom-select" style="width:200px; float: center; padding-top: 25px" id="gender-selector">View By Gender </div>   
-                </div>
-                <div class="col-sm-6">
-                    <div "custom-select" style="width:200px; float: center" id="parents-level-of-education-selector">View By Parental<br>Level of Education    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="fluid-container reading-section">
         <div class="container">
@@ -66,8 +54,17 @@
                     <h2 class="text-center">Reading Overview</h2>
                 </div>
             <hr style="height: 5px">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div "custom-select" style="width:200px; float: right; padding-top: 25px; color: blue; font-weight: bold;" id="gender-selector">View By Gender </div>   
+                    </div>
+                    <div class="col-sm-6">
+                        <div "custom-select" style="width:200px; float: center; color: blue; font-weight: bold;" id="parents-level-of-education-selector">View By Parental<br>Level of Education    </div>
+                    </div>
+                </div>
+            
             </div>
-            <div class="row">
+            <div class="row" style="padding-top: 40px">
                 <div class="col-xs-12 col-sm-4 text-center">
                     <div class="card-header">Average Reading Scores by Ethnic Group</div>
                         <div id="average-reading-score"></div>
@@ -169,7 +166,7 @@
                     <div class="card-header">Ranges of Scores by the students in the Math Test</div>
                         <div id="math-scores-range"></div>
                 </div>
-                <p class="card-header">Scores between 60-69 dominated reading scores as proving that generally the 26.4% of all students managed to get within this threshold of score ranges. While this is a positive, the negatives are 90 students or 9% of the students failed the reading test and 91% scoring between 50 and 99</p>
+                <p class="card-header">Scores between 60-69 dominated math scores as 26.8% of students scored within this range. A pass rate of 86.5% is recorded in math as 865 students pass the test and 13.5% fail to pass the pass threshold of 50. This is the only subject which had students who failed to score more that 10 for the test </p>
             </div>
         </div>
     </div>
@@ -185,7 +182,7 @@
                     <div class="card-header">Ranges of Scores by the students in the Writing Test</div>
                         <div id="writing-score-ranges"></div>
                 </div>
-                <p class="card-header">Scores between 70-79 dominated reading scores as proving that generally the 26.4% of all students managed to get within this threshold of score ranges. While this is a positive, the negatives are 90 students or 9% of the students failed the reading test and 91% scoring between 50 and 99</p>
+                <p class="card-header">Scores between 70-79 dominated writing scores as proving that generally the 25.4% of all students managed to get within this threshold of score ranges.The students who scored between 50-99 is 88.6 which a huge pass rate in this subject. While this is a positive, the negatives are 114 students or 11.4% of the students failed the writing test</p>
             </div>
         </div>
     </div>
@@ -193,22 +190,28 @@
     <div class="fluid-container">
         <div class="footer bg-primary text-white ">
             <div class="row">
-                <div class="col-md-6 py-5">
+                <div class="col-md-6 py-1">
                     <div class="container">
                         <ul class="list-unstyled list-inline text-center py-2">
                             <li class="list-inline-item">
                                 <h5 class="mb-1">Register for free</h5>
                             </li>
                             <li class="list-inline-item">
-                                <a href="#!" class="btn btn-outline-white btn-rounded">Sign up!</a>
+                                <a href="#!" class="btn btn-danger btn-rounded">Sign up!</a>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-6 py-5 text-center">
+                <div class="col-md-6 py-1 text-center">
                     <div class="container">
-                        <h5 class="text-uppercase font-weight-bold">About Us</h5>
-                        <p>Gradestats is data analysis company that helps schools improve the performances o.</p>
+                        <ul class="list-unstyled list-inline text-center py-2">
+                            <li class="list-inline-item">
+                                <h5 class="mb-1">Enrol new students</h5>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!" class="btn btn-success btn-rounded">Enrol here!</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
