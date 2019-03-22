@@ -157,7 +157,7 @@ function show_reading_fails_by_lunch(ndx) {
         },
     function remove_item(p, v) {
         p.total--;
-        if(v.readingScore > 49) {
+        if(v.readingScore >  49) {
             p.match--;
         }
         return p;
@@ -296,7 +296,7 @@ function show_math_fails_lunch(ndx) {
         },
     function remove_item(p, v) {
         p.total--;
-        if(v.mathScore < 50) {
+        if(v.mathScore > 49) {
             p.match--;
         }
         return p;
