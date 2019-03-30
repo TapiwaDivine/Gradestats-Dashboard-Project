@@ -35,7 +35,7 @@ function graphMaker(error, studentsData){
 //------------------------------------------------------------------------------------------------select menus
 function show_gender_selector(ndx){
     var dim = ndx.dimension(dc.pluck('gender'));
-    var group = dim.group().reduce();
+    var group = dim.group();
 //select menu to show scores by gender   
     dc.selectMenu("#gender-selector")
         .dimension(dim)
@@ -43,7 +43,7 @@ function show_gender_selector(ndx){
 }
 function show_parental_level_of_education_selector(ndx){
     var dim = ndx.dimension(dc.pluck('parental-level-of-education'));
-    var group = dim.group().reduce();
+    var group = dim.group();
 //select menu to scores by the quality of student's lunch   
     dc.selectMenu("#parents-level-of-education-selector")
         .dimension(dim)
