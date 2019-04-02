@@ -103,26 +103,30 @@ var averageReadingScore = readingDim.group().reduce(add_item, remove_item, initi
 function show_reading_score_by_test_prep_coarse(ndx){
     var pecDim = ndx.dimension(dc.pluck('test-preparation-course'));
     
-    var reading_score_by_prep_course = pecDim.group().reduce(
-        function add_item(p, v) {
-        p.total++;
-        if (v.readingScore >= 50){
-        p.match++;
-        }
-        return p;
+   var reading_score_by_prep_course= pecDim.group().reduce(
+        function (p, v) {
+            p.count++;
+            if (v.readingScore >= 50) {
+                
+                p.match++;
+            }
+            p.pass = (p.match / p.count) * 100;
+            p.fail = 100 - p.pass;
+            return p;
         },
-    function remove_item(p, v) {
-        p.total--;
-        if(v.readingScore < 50) {
-            p.match--;
-        }
-        return p;
+        function (p, v) {
+            p.count--;
+            if (v.readingScore >= 50) {
+                
+                p.match--;
+            }
+            p.pass = (p.match / p.count) * 100;
+            p.fail = 100 - p.pass;
+            return p;
         },
-    
-    function initialise() {
-        return {total: 0, match: 0};
+        function () {
+            return {count: 0, match: 0};
         }
-        
     );
     
     dc.pieChart("#reading-pass-pec")
@@ -131,12 +135,8 @@ function show_reading_score_by_test_prep_coarse(ndx){
         .dimension(pecDim)
         .transitionDuration(500)
         .group(reading_score_by_prep_course)
-        .valueAccessor(function(d) {
-            if(d.value.total > 0) {
-                return (d.value.match / d.value.total).toFixed(2) * 100;
-            } else {
-                return 0;
-            }
+        .valueAccessor(function(p) {
+            return p.value.pass.toFixed(2);
         })
         .legend(dc.legend().x(220).y(10).gap(5))
         .colorAccessor(d => d.key)
@@ -148,23 +148,28 @@ function show_reading_fails_by_lunch(ndx) {
     var  readingDim = ndx.dimension(dc.pluck('lunch'));
     
     var readingScoreFailsByLunchTaken = readingDim.group().reduce(
-        function add_item(p, v) {
-        p.total++;
-        if (v.readingScore <= 49){
-        p.match++;
-        }
-        return p;
+        function (p, v) {
+            p.count++;
+            if (v.readingScore <= 49) {
+                
+                p.match++;
+            }
+            p.pass = (p.match / p.count) * 100;
+            p.fail = 100 - p.pass;
+            return p;
         },
-    function remove_item(p, v) {
-        p.total--;
-        if(v.readingScore >  49) {
-            p.match--;
-        }
-        return p;
+        function (p, v) {
+            p.count--;
+            if (v.readingScore <= 49) {
+                
+                p.match--;
+            }
+            p.pass = (p.match / p.count) * 100;
+            p.fail = 100 - p.pass;
+            return p;
         },
-    
-    function initialise() {
-        return {total: 0, match: 0};
+        function () {
+            return {count: 0, match: 0};
         }
         
     );
@@ -175,12 +180,8 @@ function show_reading_fails_by_lunch(ndx) {
         .innerRadius(50)
         .dimension(readingDim)
         .group(readingScoreFailsByLunchTaken)
-        .valueAccessor(function(d) {
-            if(d.value.total > 0) {
-                return (d.value.match / d.value.total).toFixed(2) * 100;
-            } else {
-                return 0;
-            }
+        .valueAccessor(function(p) {
+            return p.value.pass.toFixed(2);
         })
         .transitionDuration(500)
         .legend(dc.legend().x(220).y(10).gap(5))
@@ -242,26 +243,30 @@ var averageMathscore = mathDim.group().reduce(add_item, remove_item, initialise)
 function show_math_score_by_test_prep_coarse(ndx){
     var passDim = ndx.dimension(dc.pluck('test-preparation-course'));
     
-    var math_score_by_prep_course = passDim.group().reduce(
-        function add_item(p, v) {
-        p.total++;
-        if (v.mathScore >= 50){
-        p.match++;
-        }
-        return p;
+    var math_score_by_prep_course= passDim.group().reduce(
+        function (p, v) {
+            p.count++;
+            if (v.mathScore >= 50) {
+                
+                p.match++;
+            }
+            p.pass = (p.match / p.count) * 100;
+            p.fail = 100 - p.pass;
+            return p;
         },
-    function remove_item(p, v) {
-        p.total--;
-        if(v.mathScore > 50) {
-            p.match--;
-        }
-        return p;
+        function (p, v) {
+            p.count--;
+            if (v.mathScore >= 50) {
+                
+                p.match--;
+            }
+            p.pass = (p.match / p.count) * 100;
+            p.fail = 100 - p.pass;
+            return p;
         },
-    
-    function initialise() {
-        return {total: 0, match: 0};
+        function () {
+            return {count: 0, match: 0};
         }
-        
     );
  
     dc.pieChart("#math-pass-rate")
@@ -270,12 +275,8 @@ function show_math_score_by_test_prep_coarse(ndx){
         .dimension(passDim)
         .transitionDuration(500)
         .group(math_score_by_prep_course)
-        .valueAccessor(function(d) {
-            if(d.value.total > 0) {
-                return (d.value.match / d.value.total).toFixed(2) * 100;
-            } else {
-                return 0;
-            }
+        .valueAccessor(function(p) {
+            return p.value.pass.toFixed(2);
         })
         .legend(dc.legend().x(220).y(10))
         .colorAccessor(d => d.key)
@@ -287,23 +288,28 @@ function show_math_fails_lunch(ndx) {
     var  dim = ndx.dimension(dc.pluck('lunch'));
     
     var mathScoreFailsByLunchTaken = dim.group().reduce(
-        function add_item(p, v) {
-        p.total++;
-        if (v.mathScore <= 49){
-        p.match++;
-        }
-        return p;
+        function (p, v) {
+            p.count++;
+            if (v.mathScore <= 49) {
+                
+                p.match++;
+            }
+            p.pass = (p.match / p.count) * 100;
+            p.fail = 100 - p.pass;
+            return p;
         },
-    function remove_item(p, v) {
-        p.total--;
-        if(v.mathScore > 49) {
-            p.match--;
-        }
-        return p;
+        function (p, v) {
+            p.count--;
+            if (v.mathScore <= 49) {
+                
+                p.match--;
+            }
+            p.pass = (p.match / p.count) * 100;
+            p.fail = 100 - p.pass;
+            return p;
         },
-    
-    function initialise() {
-        return {total: 0, match: 0};
+        function () {
+            return {count: 0, match: 0};
         }
         
     );
@@ -314,12 +320,8 @@ function show_math_fails_lunch(ndx) {
         .innerRadius(50)
         .dimension(dim)
         .group(mathScoreFailsByLunchTaken)
-        .valueAccessor(function(d) {
-            if(d.value.total > 0) {
-                return (d.value.match / d.value.total).toFixed(2) * 100;
-            } else {
-                return 0;
-            }
+        .valueAccessor(function(p) {
+            return p.value.pass.toFixed(2);
         })
         .transitionDuration(500)
         .legend(dc.legend().x(220).y(10))
@@ -380,26 +382,30 @@ var averageWritingscore = writingDim.group().reduce(add_item, remove_item, initi
 function show_writing_percentage_by_test_prep_coarse(ndx){
     var pecDim = ndx.dimension(dc.pluck('test-preparation-course'));
     
-    var writing_percent_by_prep_course = pecDim.group().reduce(
-        function add_item(p, v) {
-        p.total++;
-        if (v.writingScore >= 50){
-        p.match++;
-        }
-        return p;
+    var writing_percent_by_prep_course= pecDim.group().reduce(
+        function (p, v) {
+            p.count++;
+            if (v.writingScore >= 50) {
+                
+                p.match++;
+            }
+            p.pass = (p.match / p.count) * 100;
+            p.fail = 100 - p.pass;
+            return p;
         },
-    function remove_item(p, v) {
-        p.total--;
-        if(v.writingScore < 50) {
-            p.match--;
-        }
-        return p;
+        function (p, v) {
+            p.count--;
+            if (v.writingScore >= 50) {
+                
+                p.match--;
+            }
+            p.pass = (p.match / p.count) * 100;
+            p.fail = 100 - p.pass;
+            return p;
         },
-    
-    function initialise() {
-        return {total: 0, match: 0};
+        function () {
+            return {count: 0, match: 0};
         }
-        
     );
     
     dc.pieChart("#writing-pass-pecentage")
@@ -408,12 +414,8 @@ function show_writing_percentage_by_test_prep_coarse(ndx){
         .dimension(pecDim)
         .transitionDuration(500)
         .group(writing_percent_by_prep_course)
-        .valueAccessor(function(d) {
-            if(d.value.total > 0) {
-                return (d.value.match / d.value.total).toFixed(2) * 100;
-            } else {
-                return 0;
-            }
+        .valueAccessor(function(p) {
+            return p.value.pass.toFixed(2);
         })
         .legend(dc.legend().x(220).y(10))
         .colorAccessor(d => d.key)
@@ -424,23 +426,28 @@ function show_writing_fails_by_lunch(ndx) {
     var  dim = ndx.dimension(dc.pluck('lunch'));
     
     var writingScoreFailsByLunchTaken = dim.group().reduce(
-        function add_item(p, v) {
-        p.total++;
-        if (v.writingScore <= 49){
-        p.match++;
-        }
-        return p;
+        function (p, v) {
+            p.count++;
+            if (v.writingScore <= 49) {
+                
+                p.match++;
+            }
+            p.pass = (p.match / p.count) * 100;
+            p.fail = 100 - p.pass;
+            return p;
         },
-    function remove_item(p, v) {
-        p.total--;
-        if(v.writingScore > 49) {
-            p.match--;
-        }
-        return p;
+        function (p, v) {
+            p.count--;
+            if (v.writingScore <= 49) {
+                
+                p.match--;
+            }
+            p.pass = (p.match / p.count) * 100;
+            p.fail = 100 - p.pass;
+            return p;
         },
-    
-    function initialise() {
-        return {total: 0, match: 0};
+        function () {
+            return {count: 0, match: 0};
         }
         
     );
@@ -451,12 +458,8 @@ function show_writing_fails_by_lunch(ndx) {
         .innerRadius(50)
         .dimension(dim)
         .group(writingScoreFailsByLunchTaken)
-        .valueAccessor(function(d) {
-            if(d.value.total > 0) {
-                return (d.value.match / d.value.total).toFixed(2) * 100;
-            } else {
-                return 0;
-            }
+        .valueAccessor(function(p) {
+            return p.value.pass.toFixed(2);
         })
         .transitionDuration(500)
         .legend(dc.legend().x(220).y(10))

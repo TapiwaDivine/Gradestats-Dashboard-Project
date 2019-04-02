@@ -54,7 +54,9 @@ We look at the average pass rate by students ethnicity, compare the pass percent
 ## Testing
 
 - The website is responsive on all pages and though there is gap on the home page when its on the mobile size screens.
-- The all charts have been tested and 
+- I used chrome developer tools test the website's responsiveness
+- I also manually tested the website at every point of development. 
+- The all charts have been tested and they are working well.
 
 ## Deployment
 - This project was done in cloud9 ide and deployed with bash terminal using git to push the codes to github.
