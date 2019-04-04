@@ -55,11 +55,13 @@ h2{
 }
 
 #showcase .bg-image{
-    background:linear-gradient(
+    background-image: linear-gradient(
     rgba(0, 0, 0, 0.3),
     rgba(0, 0, 0, 0.3)
     ),
-    url("static/images/students.jpg") no-repeat center center;
+    url(/static/images/students.jpg); 
+    background-repeat: no-repeat; 
+    background-position: center;
     background-size: cover;
     height: 100vh;
     text-align: center;
