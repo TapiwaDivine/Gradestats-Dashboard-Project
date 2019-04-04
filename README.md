@@ -78,4 +78,4 @@ https://github.com/TapiwaDivine/Gradestats-Dashboard
 ### Acknowledgements
 - I drew inspiration from idashboards.com/solutions/k-12-education-dashboards and caschooldashboard.org
 - I also acknowledge the influence of stackflow in this project and traversy Media youtube channel
-- Also the review and advise from Mentor and Nakita tutor support at code institute
+- Also the review and advise from Mentor and tutor support at code institute
