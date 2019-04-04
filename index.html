@@ -26,17 +26,17 @@
 
 <body>
     <nav class="navbar navbar-dark bg-primary fixed-top">
-        <a class="navbar-brand" style="font-family: 'Black Ops One', cursive; font-size: 48px" href="#">GRADESTATS</a>
+        <a class="navbar-brand" href="#">GRADESTATS</a>
             <div class="pos-f-t">
-                <div id="mySidebar" class="sidebar">
-                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+                <div id="mySidebar" class="sidebar" onmouseleave="closeNav()">
+                    <a href="javascript:void(0)" class="closebtn" ></a>
                     <a href="#">Home</a>
                     <a href="#overview">Overview</a>
                     <a href="#scoreRanges">Score Ranges</a>
                     <a href="#contact">Contact</a>
                 </div>
                 <div id="main">
-                    <button class="openbtn" onclick="openNav()">☰</button>
+                    <button class="openbtn" onmouseover="openNav()">☰</button>
                 </div>
             </div>
     </nav>
@@ -243,14 +243,17 @@
 
 <script type="text/javascript">
    
-    function openNav() {
+    function openNav(mySidebar) {
         document.getElementById("mySidebar").style.width = "250px";
         document.getElementById("main").style.marginLeft = "250px";
+        document.getElementById("body").style.opacity = "(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)";
+
     }
-    
+
     function closeNav() {
         document.getElementById("mySidebar").style.width = "0";
         document.getElementById("main").style.marginLeft = "0";
+
     }
 
 </script>

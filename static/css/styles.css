@@ -32,6 +32,7 @@ h2{
     z-index: -1;
     
 }
+
 .container-fluid {
     width: 100%;
     padding-right: 0px;
@@ -43,10 +44,15 @@ h2{
 
 /*-------------------------------------------------Header------------------------------------*/
 
-a .navbar-brand {
-    color: #fff!important;
+.navbar-dark .navbar-brand {
+    color: #fff;
+    font-size: 48px;
+    font-family: 'Black Ops One', cursive;
 }
- 
+.navbar-dark .navbar-brand:hover{
+    color: #C0C0C0;
+    transition: .5s ease-in-out;
+}
 
 #showcase .bg-image{
     background:linear-gradient(
@@ -75,10 +81,6 @@ a .navbar-brand {
 /*----------------------------------------Main---------------------------------------*/
 
 
-.barchart-info {
-    background-color: #ADDFFF;
-}
-
 .sidebar {
     height: 100%;
     width: 0;
@@ -86,24 +88,33 @@ a .navbar-brand {
     z-index: 2;
     top: 0;
     right: 0;
-    background-color: transparent;
+    background-color: #D3D3D3;
     border: none;
     overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 30px;
+    transition: all 0.5s;
+    display: block;
+    padding-top: 10px;
+}
+
+.sidenav:hover{
+   width: 250px;
 }
 
 .sidebar a {
-    padding: 6px 6px 6px 18px;
+    padding: 10px 6px 10px 18px;
     font-weight: 700;
-    font-size: 14px;
-    color: #000;
+    font-size: 18px;
+    color: #1a75ff;
+    border-bottom: 1px solid #A9A9A9;
     display: block;
     transition: 0.3s;
 }
 
 .sidebar a:hover {
-    color: #818181;
+    color: #fff;
+    text-decoration: underline;
+    background-color:#1a75ff;
+    transition: all 1s ease;
 }
 
 .sidebar .closebtn {
@@ -112,6 +123,7 @@ a .navbar-brand {
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
+    border: none;
 }
 
 .openbtn {
@@ -123,11 +135,22 @@ a .navbar-brand {
 }
 
 .openbtn:hover {
-    background-color: #005ce6;
+    background-color: #fff;
+    color: #1a75ff;
 }
 
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    display: none;
+}
+
+
 #main {
-    transition: margin-left .5s;
+    transition: margin-left 2s;
     padding: 16px;
 }
 

@@ -63,6 +63,7 @@ We look at the average pass rate by students ethnicity, compare the pass percent
 https://github.com/TapiwaDivine/Gradestats-Dashboard
 
 ## Credits
+- In this project i relied heavily with the coarse material in the video lesson. I also used use codes from other soureces listed in the content section
 
 ### Content
 - getbootstrap.com
